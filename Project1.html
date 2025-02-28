@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Friday - Sign Up</title>
+    <link rel="Shortcut icon" href="https://img.freepik.com/free-vector/black-friday-sale-banner-template-design_1199-158.jpg?ga=GA1.1.187464687.1740433974" type="image/x-icon">
+</head>
+<body style="background-image: url('https://img.freepik.com/free-vector/black-friday-background-with-3d-black-spheres_1017-5601.jpg?t=st=1740440635~exp=1740444235~hmac=549a86a753084b24faeb3ec10895fa7ae435fb8c3d147d28a3efa72765e915db&w=740'); 
+             background-size: cover; 
+             background-position: center; 
+             background-repeat: no-repeat; 
+             height: 100vh; 
+             margin: 0;
+             display: flex; 
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+             color: white;">
+
+    <!-- HEADER -->
+    <header style="display: flex; justify-content: center; align-items: center; padding: 20px; width: 100%; background: rgba(0, 0, 0, 0.7); position: absolute; top: 0;">
+        <nav>
+            <ul style="list-style: none; display: flex; padding: 0; margin: 0;">
+                <li><a href="#" style="cursor: pointer; padding: 0px 15px; text-decoration: none; font-size: 20px; font-weight: 900; color: #eee;">Home</a></li>
+                <li><a href="#" style="padding: 0px 15px; text-decoration: none; font-size: 20px; font-weight: 900; color: #eee;">About</a></li>
+                <li><a href="#" style="padding: 0px 15px; text-decoration: none; font-size: 20px; font-weight: 900; color: #eee;">Notification</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SIGNUP FORM -->
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin-top: 50px;">
+        <h1 style="margin-bottom: 20px;">Sign Up</h1>
+        <form id="signup-form" style="display: flex; flex-direction: column; align-items: center; background: rgba(0, 0, 0, 0.8); padding: 20px; border-radius: 10px; width: 300px;">
+            
+            <label style="margin-bottom: 5px;">Full Name</label>
+            <input type="text" id="fullname" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: none; border-radius: 5px;">
+
+            <label style="margin-bottom: 5px;">Username</label>
+            <input type="text" id="username" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: none; border-radius: 5px;">
+
+            <label style="margin-bottom: 5px;">Password</label>
+            <input type="password" id="password" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: none; border-radius: 5px;">
+
+            <label style="margin-bottom: 5px;">Email</label>
+            <input type="email" id="email" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: none; border-radius: 5px;">
+
+            <label style="margin-bottom: 5px;">Phone Number</label>
+            <input type="number" id="phone" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: none; border-radius: 5px;">
+
+            <button type="submit" style="width: 100%; padding: 10px; background: red; color: white; font-weight: bold; border: none; border-radius: 5px; cursor: pointer;">
+                Sign Up
+            </button>
+        </form>
+
+        <button onclick="retrieveUserInfo()" style="margin-top: 10px; padding: 10px; background: green; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Show Saved Info
+        </button>
+    </div>
+
+    <!-- JAVASCRIPT TO SAVE & RETRIEVE USER INFO -->
+    <script>
+        document.getElementById("signup-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            let fullname = document.getElementById("fullname").value;
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+
+            if (fullname && username && password && email && phone) {
+                // Save user info in LocalStorage
+                let userInfo = {
+                    fullname: fullname,
+                    username: username,
+                    password: password, // ⚠ Storing passwords in LocalStorage is NOT secure!
+                    email: email,
+                    phone: phone
+                };
+
+                localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
+                alert("User information saved successfully!");
+            } else {
+                alert("Please fill in all fields.");
+            }
+        });
+
+        function retrieveUserInfo() {
+            let savedUser = localStorage.getItem("userInfo");
+
+            if (savedUser) {
+                let user = JSON.parse(savedUser);
+                alert(`Saved Info:\nName: ${user.fullname}\nUsername: ${user.username}\nEmail: ${user.email}\nPhone: ${user.phone}`);
+            } else {
+                alert("No user information found.");
+            }
+        }
+    </script>
+
+</body> 
+</html>
